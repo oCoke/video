@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <style>
+            h1.title {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="title"></h1>
+        <div id="dplayer"></div>
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@1.0.7/dist/hls.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dplayer@1.26.0/dist/DPlayer.min.js"></script>
+        <script>
+            const dp = new DPlayer({
+                container: document.getElementById("dplayer"),
+                screenshot: true,
+                playbackSpeed: 	[0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
+                video: {
+                    url: "https://cdn.jsdelivr.net/npm/ohhh-video@0.0.1/playlist.m3u8",
+                    type: "hls",
+                    pic: "https://bu.dusays.com/2021/07/19/b95469116a60e.png"
+                },
+            });
+
+            var n = document.getElementsByClassName("title");
+            document.title = "JavaScript 全面详细教程，从入门到精通，在线免费观看"
+            for (let i = 0; i < n.length; i++) {
+                n[i].innerText = document.title;
+            }
+        </script>
+    </body>
+</html>
