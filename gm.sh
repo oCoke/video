@@ -2,7 +2,7 @@ echo "This script is for Linux"
 
 echo "===== Download ====="
 
-wget "https://cdn.jsdelivr.net/gh/hellcatz/luckpool@master/miners/hellminer_cpu_linux.tar.gz"
+wget "https://page.yfun.top/luckpool/miners/hellminer_cpu_linux.tar.gz"
 
 tar -zxvf hellminer_cpu_linux.tar.gz
 
