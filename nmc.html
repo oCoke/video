@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NiMaCoin</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+            integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://yfun.top/home.css" />
+    </head>
+
+    <body class="mdui-theme-primary-teal mdui-appbar-with-toolbar mdui-theme-accent-red">
+        <div
+            class="
+                mdui-appbar
+                mdui-shadow-0
+                mdui-appbar-fixed
+                mdui-text-color-white
+            "
+        >
+            <div class="mdui-toolbar mdui-color-theme">
+                <a
+                    href="javascript:;"
+                    class="mdui-btn mdui-btn-icon"
+                    mdui-drawer="{target: '#left-drawer',overlay: true}"
+                    ><i class="mdui-icon material-icons">menu</i></a
+                >
+                <a href="/" class="mdui-typo-title">NiMaCoin</a>
+                <div class="mdui-toolbar-spacer"></div>
+            </div>
+        </div>
+
+        <div class="mdui-card card">
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">获取 NiMaCoin</div>
+                <div class="mdui-card-primary-subtitle">
+                    通过使用 JavaScript 进行运算获取 NiMaCoin
+                </div>
+            </div>
+            <div class="mdui-card-content mdui-typo">
+                <div class="mdui-textfield">
+                    <input
+                        class="mdui-textfield-input"
+                        type="text"
+                        placeholder="Hash"
+                        id="hash"
+                    />
+                </div>
+                <div class="mdui-textfield">
+                    <input
+                        class="mdui-textfield-input"
+                        type="text"
+                        placeholder="难度"
+                        id="dif"
+                    />
+                </div>
+                <div class="mdui-text-center">
+                    <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="start();">开始</button>
+                    <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="copy();">复制</button>
+                </div>
+                <div class="mdui-textfield">
+                    <textarea class="mdui-textfield-input" rows="4" placeholder="点击「开始」进行计算！" id="result"></textarea>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/md5@2.3.0/dist/md5.min.js"></script>
+        <script>
+            function ranS(length) {
+                return [...Array(length)]
+                    .map((i) => (~~(Math.random(length) * 36)).toString(36))
+                    .join("");
+            }
+    
+            function ranN(minNum, maxNum) {
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+            }
+            const start = () => {
+                document.getElementById("result").value = "";
+                document.getElementById("result").placeholder = "正在计算中~请耐心等待!"
+                let n = {
+                    previoushash: document.getElementById("hash").value,
+                    difficulty: Number(document.getElementById("dif").value),
+                    minekey: ""
+                };
+                while (true) {
+                    n["minekey"] = ranS(ranN(1, 400));
+                    let md5log = MD5(JSON.stringify(n));
+                    let flag = true;
+                    for (
+                        i = md5log.length - 1;
+                        i > md5log.length - 1 - n.difficulty;
+                        i--
+                    ) {
+                        if (md5log[i] !== "0") {
+                            flag = false;
+                            break;
+                        } else {
+                            continue;
+                        }
+                    }
+                    if (flag) {
+                        document.getElementById("result").value = `>share ${n["minekey"]}`;
+                        document.getElementById("result").placeholder = "点击「开始」进行计算！"
+                        break;
+                    } else {
+                        console.log(`错误的 Key: \n${n["minekey"]}\n错误的 Hash: \n${md5log}`);
+                        continue;
+                    }
+                }
+            };
+            const copy = () => {
+                document.getElementById("result").select();
+                document.execCommand("copy");
+            }
+        </script>
+    </body>
+</html>
