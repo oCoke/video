@@ -62,20 +62,31 @@
                 </div>
             </div>
         </div>
- <script src="https://giscus.app/client.js"
-        data-repo="oCoke/Friends"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkzMTcxNjY4MzM="
-        data-category="YFun's Blog"
-        data-category-id="DIC_kwDOEueU8c4B-cO5"
-        data-mapping="pathname"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-theme="light"
-        crossorigin="anonymous"
-        async>
-</script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+          integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+          crossorigin="anonymous"
+        ></script>
         <script src="https://cdn.jsdelivr.net/npm/md5@2.3.0/dist/md5.min.js"></script>
         <script>
+            let script = document.createElement('script');
+            script.src = "https://giscus.app/client.js";
+            script.onload = () => {
+              mdui.$('.giscus').addClass('card mdui-card');
+              mdui.$('.giscus').css({"padding:"24px 16px 16px 16px"});
+            }
+            script["async"] = true;
+            script["data-repo"] = "oCoke/Friends";
+            script["data-repo-id"] = "MDEwOlJlcG9zaXRvcnkzMTcxNjY4MzM=";
+            script["data-category"] = "YFun's Blog";
+            script["data-category-id"] = "DIC_kwDOEueU8c4B-cO5";
+            script["data-mapping"] = "pathname";
+            script["data-reactions-enabled"] = "1"
+            script["data-emit-metadata"] = "0";
+            script["data-theme"] = "light";
+            script["crossorigin"] = "anonymous";
+            document.body.appendChild(script);
+            
             function ranS(length) {
                 return [...Array(length)]
                     .map((i) => (~~(Math.random(length) * 36)).toString(36))
